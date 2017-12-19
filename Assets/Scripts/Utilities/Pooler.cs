@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class Pooler : MonoBehaviour
 {
-	[Header("Setup")]
-	public Transform poolTransform = null;
-	private static Pooler instance = null;
-
 	[Header("Pool Arrays")]
 	public PoolStruct[] objectArray;
 	public PoolStruct[] projectileArray;
+
+	private static Pooler instance = null;
+	[HideInInspector] public Transform poolTransform = null;
 
 
 	#region Properties
@@ -49,6 +48,8 @@ public class Pooler : MonoBehaviour
 			instance = this;
 		}
 
+		poolTransform = GetComponent<Transform>();
+
 		// Instantiate pooled objects
 		foreach (PoolStruct item in objectArray)
 		{
@@ -72,10 +73,7 @@ public class Pooler : MonoBehaviour
 				item.poolList.Add(obj);
 			}
 		}
-
-		GameController.Instance.poolScript = this;
 	}
-
 
 	public GameObject GetObject(GameObject prefab)
 	{
@@ -107,7 +105,6 @@ public class Pooler : MonoBehaviour
 		return null;
 	}
 
-
 	public GameObject GetProjectile(GameObject prefab)
 	{
 		// Find projectile in pool
@@ -137,7 +134,6 @@ public class Pooler : MonoBehaviour
 
 		return null;
 	}
-
 
 	public GameObject GetRandomObject()
 	{

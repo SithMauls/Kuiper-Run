@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -101,11 +101,12 @@ public class GameController : MonoBehaviour
 	
 	private void Update()
 	{
+        //Update and print score
 		score += shipSpeed * Time.deltaTime;
 		scoreText.text = Mathf.FloorToInt(score).ToString() + " Xm";	
 		
 		float acceleration = (float)System.Math.Round((double)Input.acceleration.y, 2);
-		acceleration = Mathf.Clamp(acceleration, -1.0f, 0.0f);
+		acceleration = Mathf.Clamp(acceleration, -0.75f, -0.25f);
 		ShipSpeed = 5.0f + (acceleration + 1.0f) * 10.0f;
 
 		ParticleSystem.ShapeModule jetShape = jet.shape;

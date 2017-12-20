@@ -5,16 +5,14 @@ using UnityEngine;
 public class EquipmentController : MonoBehaviour
 {
 	[Header("Setup")]
-	[SerializeField] private bool collectPowerUps = true;
-	private Transform thisTransform = null;
-
+	[SerializeField] private bool collectPickUps = true;
 	[Header("Equipment")]
 	[SerializeField] private GameObject currentWeapon = null;
-	[HideInInspector] public WeaponBase weaponScript = null;
-	[SerializeField] private GameObject currentShield = null;
-	[HideInInspector] public ShieldBase shieldScript = null;
+	[SerializeField] private GameObject currentPower = null;
 
-	[Header("User Interface")]
+	private Transform thisTransform = null;
+	[HideInInspector] public WeaponBase weaponScript = null;
+	[HideInInspector] public PowerBase powerScript = null;
 	private ScrollingText textScript = null;
 
 
@@ -38,21 +36,21 @@ public class EquipmentController : MonoBehaviour
 		}
 	}
 
-	public GameObject CurrentShield
+	public GameObject CurrentPower
 	{
 		set
 		{
-			if (currentShield != null)
+			if (currentPower != null)
 			{
-				Destroy(currentShield);
+				Destroy(currentPower);
 			}
 
-			currentShield = Instantiate(value, thisTransform);
-			shieldScript = currentShield.GetComponent<ShieldBase>();
+			currentPower = Instantiate(value, thisTransform);
+			powerScript = currentPower.GetComponent<PowerBase>();
 
 			if (gameObject.CompareTag("Player"))
 			{
-				textScript.Scroll(shieldScript.shieldName);
+				textScript.Scroll(powerScript.powerName);
 			}
 		}
 	}
@@ -67,27 +65,27 @@ public class EquipmentController : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collectPowerUps)
+		if (collectPickUps)
 		{
 			if (collision.CompareTag("PowerUp"))
 			{
-				PowerUp powerUpScript = collision.GetComponent<PowerUp>();
+				PickUp pickUpScript = collision.GetComponent<PickUp>();
 
-				switch (powerUpScript.itemType)
+				switch (pickUpScript.itemType)
 				{
-					case PowerUp.Item.Weapon:
-						CurrentWeapon = powerUpScript.currentItem;
+					case PickUp.Item.Weapon:
+						CurrentWeapon = pickUpScript.currentItem;
 						break;
 
-					case PowerUp.Item.Shield:
-						CurrentShield = powerUpScript.currentItem;
+					case PickUp.Item.Power:
+						CurrentPower = pickUpScript.currentItem;
 						break;
 
 					default:
 						break;
 				}
 
-				powerUpScript.Remove();
+				pickUpScript.Remove();
 			}
 		}
 	}

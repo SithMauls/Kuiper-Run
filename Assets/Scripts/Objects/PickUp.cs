@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUp : ObjectBase
+public class PickUp : ObjectBase
 {
 	[Header("Movement")]
 	[SerializeField] private float speed = 0f;
@@ -15,7 +15,7 @@ public class PowerUp : ObjectBase
 
 
 	#region Enumerators
-	public enum Item { Weapon, Shield };
+	public enum Item { Weapon, Power };
 	#endregion
 
 

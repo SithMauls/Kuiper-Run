@@ -32,8 +32,9 @@ public class Spawner : MonoBehaviour
 		obj.transform.parent = thisTransform;
 		obj.SetActive(true);
 
-	  //spawnInterval = baseSpawnTime / (currentShipSpeed / averageShipSpeed)
-		spawnInterval = 0.5f / (GameController.Instance.shipSpeed / 10.0f);
+		//spawnInterval = baseSpawnTime / (currentShipSpeed / averageShipSpeed)
+		float x = Random.Range(0.25f, 0.5f);
+		spawnInterval = x / (GameController.Instance.shipSpeed / 10.0f);
 
 		Invoke("SpawnObject", spawnInterval);
 	}

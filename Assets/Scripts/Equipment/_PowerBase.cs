@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class ShieldBase : MonoBehaviour
+public abstract class PowerBase : MonoBehaviour
 {
-	[Header("Shield")]
-	public string shieldName;
+	[Header("Power")]
+	public string powerName;
 	[SerializeField] protected float duration = 5.0f;
 
 	[Header("User Interface")]
-	protected Slider shieldSlider;
+	protected Slider powerSlider;
 
 
 	#region Properties
@@ -22,9 +22,10 @@ public abstract class ShieldBase : MonoBehaviour
 
 		set {
 			duration = value;
-			shieldSlider.value = duration;
+			powerSlider.value = duration;
 
 			if (duration <= 0) {
+				GameController.Instance.ShipSpeed = 5.0f;
 				Destroy(gameObject);
 			}
 		}
@@ -34,13 +35,14 @@ public abstract class ShieldBase : MonoBehaviour
 
 	protected virtual void Awake()
 	{
-		shieldSlider = GameController.Instance.shieldSlider;
+		powerSlider = GameController.Instance.powerSlider;
 	}
 
 
 	protected virtual void OnEnable() {
+
 		//User Interface
-		shieldSlider.maxValue = duration;
-		shieldSlider.value = duration;
+		powerSlider.maxValue = duration;
+		powerSlider.value = duration;
 	}
 }

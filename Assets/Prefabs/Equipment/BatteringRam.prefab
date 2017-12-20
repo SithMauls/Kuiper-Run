@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4528568fe74fe4db7a15de1ce696d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldName: BATTERING RAM
+  powerName: BATTERING RAM
   duration: 5
 --- !u!212 &212783262552841990
 SpriteRenderer:
